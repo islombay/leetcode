@@ -3,14 +3,75 @@ package main
 import "fmt"
 
 func main() {
-	s := "dvdf"
-	fmt.Println(lengthOfLongestSubstring(s))
+	cases := []struct {
+		name   string
+		s      string
+		result int
+	}{
+		{
+			name:   "1",
+			s:      "abcabcbb",
+			result: 3,
+		},
+		{
+			name:   "2",
+			s:      "bbbbb",
+			result: 1,
+		},
+		{
+			name:   "3",
+			s:      "pwwkew",
+			result: 3,
+		},
+	}
 
-	s = "bbbbb"
-	fmt.Println(lengthOfLongestSubstring(s))
+	for _, c := range cases {
+		if res := lengthOfLongestSubstring_2(c.s); res != c.result {
+			fmt.Printf("- Test %s failed, expected %d, got %d\n", c.name, c.result, res)
+		} else {
+			fmt.Printf("Test %s passed, expected %d, got %d\n", c.name, c.result, res)
+		}
+	}
+}
 
-	// s = "pwwkew"
-	// fmt.Println(lengthOfLongestSubstring(s))
+func lengthOfLongestSubstring_2(s string) int {
+	var (
+		//unq       = make(map[uint8]int)
+		start     = 0
+		end       = 0
+		maxLength = 0
+		//tmp       = ""
+	)
+
+	for ; end < len(s); end++ {
+		if validSTR(s[start : end+1]) {
+			maxLength = max(maxLength, end-start+1)
+		} else {
+			start++
+
+		}
+	}
+
+	return maxLength
+}
+
+func validSTR(s string) bool {
+	m := make(map[rune]int)
+	for _, c := range s {
+		if _, ok := m[c]; ok {
+			return false
+		} else {
+			m[c] = 1
+		}
+	}
+	return true
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
 
 func lengthOfLongestSubstring(s string) int {
@@ -21,7 +82,7 @@ func lengthOfLongestSubstring(s string) int {
 	}
 
 	var (
-		tmp string = ""
+		tmp = ""
 	)
 
 	subs := make(map[string]int, 0)
