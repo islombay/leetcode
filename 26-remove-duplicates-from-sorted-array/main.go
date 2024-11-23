@@ -24,7 +24,8 @@ func main() {
 	}
 
 	for _, c := range cases {
-		if result := removeDuplicates(c.nums); result != c.result {
+		result := removeDuplicates2(c.nums)
+		if result != c.result {
 			fmt.Printf("- Test %s failed, expected result %d, expected array %v, got result %d, got array %v\n", c.name, c.result, c.resultArray, result, c.nums)
 		} else if result == c.result {
 			for i := range c.resultArray {
@@ -35,6 +36,22 @@ func main() {
 			fmt.Printf("Test %s passed, expected result %d, expected array %v, got result %d, got array %v\n", c.name, c.result, c.resultArray, result, c.nums)
 		}
 	}
+}
+
+// revision
+func removeDuplicates2(nums []int) int {
+	unique := make(map[int]int)
+	arrIndex := 0
+
+	for i := 0; i < len(nums); i++ {
+		if _, ok := unique[nums[i]]; ok {
+			continue
+		}
+		unique[nums[i]] = 1
+		nums[arrIndex] = nums[i]
+		arrIndex++
+	}
+	return arrIndex
 }
 
 func removeDuplicates(nums []int) int {
