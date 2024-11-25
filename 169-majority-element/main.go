@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
 	cases := []struct {
@@ -21,7 +24,7 @@ func main() {
 	}
 
 	for _, c := range cases {
-		result := majorityElement(c.nums)
+		result := majorityElementWithSort(c.nums)
 		if result != c.result {
 			fmt.Printf(" - Test %s failed, expected %d, got %d\n", c.name, c.result, result)
 		} else {
@@ -29,6 +32,12 @@ func main() {
 		}
 	}
 }
+
+func majorityElementWithSort(nums []int) int {
+	sort.Ints(nums)
+	return nums[len(nums)/2]
+}
+
 func majorityElement(nums []int) int {
 	var (
 		counter    = make(map[int]int)
