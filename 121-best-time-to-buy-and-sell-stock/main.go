@@ -31,13 +31,30 @@ func main() {
 	}
 
 	for _, c := range cases {
-		result := maxProfit(c.prices)
+		result := maxProfit2(c.prices)
 		if c.result != result {
 			fmt.Printf("- Test %s failed, expected %d, got %d\n", c.name, c.result, result)
 		} else {
 			fmt.Printf("Test %s passed, expected %d, got %d\n", c.name, c.result, result)
 		}
 	}
+}
+
+func maxProfit2(prices []int) int {
+	minPrice := prices[0]
+	maxPrice := 0
+
+	for _, v := range prices {
+		diff := v - minPrice
+		if diff > maxPrice {
+			maxPrice = diff
+		}
+
+		if v < minPrice {
+			minPrice = v
+		}
+	}
+	return maxPrice
 }
 
 func maxProfit(prices []int) int {
