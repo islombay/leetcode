@@ -48,6 +48,11 @@ func main() {
 			result: false,
 			head:   &ListNode{Val: 1},
 		},
+		{
+			name:   "4",
+			result: false,
+			head:   nil,
+		},
 	}
 
 	for _, c := range cases {
@@ -60,14 +65,24 @@ func main() {
 }
 
 func hasCycle(head *ListNode) bool {
-	list := make(map[*ListNode]byte)
+	//list := make(map[*ListNode]byte)
 
-	for head != nil {
-		if _, ok := list[head]; ok {
+	if head == nil || head.Next == nil {
+		return false
+	}
+	slow := head
+	fast := head.Next
+	for fast != nil && fast.Next != nil {
+		if slow == fast {
 			return true
 		}
-		list[head]++
-		head = head.Next
+		slow = slow.Next
+		fast = fast.Next.Next
+		//if _, ok := list[head]; ok {
+		//	return true
+		//}
+		//list[head]++
+		//head = head.Next
 	}
 	return false
 }
