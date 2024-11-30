@@ -35,24 +35,23 @@ Out:
 type Key [26]byte
 
 func makeHash(str string) Key {
-	key := Key{}
+	k := Key{}
 	for i := range str {
-		key[str[i]-'a']++
+		k[str[i]-'a']++
 	}
-	return key
+	return k
 }
 
 func groupAnagrams(strs []string) [][]string {
 	list := map[Key][]string{}
 
 	for _, str := range strs {
-		hash := makeHash(str)
-		list[hash] = append(list[hash], str)
+		k := makeHash(str)
+		list[k] = append(list[k], str)
 	}
-
-	var result [][]string
+	res := [][]string{}
 	for _, v := range list {
-		result = append(result, v)
+		res = append(res, v)
 	}
-	return result
+	return res
 }
