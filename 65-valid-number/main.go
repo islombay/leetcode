@@ -73,10 +73,7 @@ func isNumber(s string) bool {
 	}
 
 	if len(s) == 1 {
-		if !nums[rune(s[0])] {
-			return false
-		}
-		return true
+		return nums[rune(s[0])]
 	}
 
 	if rune(s[0]) == 'e' || rune(s[0]) == 'E' || rune(s[len(s)-1]) == 'e' || rune(s[len(s)-1]) == 'E' || rune(s[len(s)-1]) == '+' || rune(s[len(s)-1]) == '-' {
@@ -119,8 +116,9 @@ func isNumber(s string) bool {
 			eOccurIndex = i
 		}
 	}
-	if dotOccur && !digitOccur {
-		return false
-	}
-	return true
+	return !(dotOccur && !digitOccur)
+	//if dotOccur && !digitOccur {
+	//	return false
+	//}
+	//return true
 }
