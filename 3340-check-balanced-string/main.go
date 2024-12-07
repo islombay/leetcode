@@ -10,21 +10,9 @@ func main() {
 		num  string
 		want bool
 	}{
-		{
-			id:   1,
-			num:  "1234",
-			want: false,
-		},
-		{
-			id:   2,
-			num:  "24123",
-			want: true,
-		},
-		{
-			id:   3,
-			num:  "123",
-			want: false,
-		},
+		{id: 1, num: "1234", want: false},
+		{id: 2, num: "24123", want: true},
+		{id: 3, num: "123", want: false},
 	}
 
 	for _, c := range cases {
