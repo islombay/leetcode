@@ -69,7 +69,7 @@ func main() {
 
 func isSymmetric(root *TreeNode) bool {
 	left, right := root.Left, root.Right
-	stackLeft, stackRight := []*TreeNode{}, []*TreeNode{}
+	stack := []*TreeNode{}
 
 	if left == nil && right == nil {
 		return true
@@ -77,20 +77,18 @@ func isSymmetric(root *TreeNode) bool {
 		return false
 	}
 
-	stackLeft = append(stackLeft, left)
-	stackRight = append(stackRight, right)
+	stack = append(stack, left, right)
 
-	for len(stackLeft) > 0 && len(stackRight) > 0 {
-		left, right = stackLeft[len(stackLeft)-1], stackRight[len(stackRight)-1]
-		stackLeft, stackRight = stackLeft[:len(stackLeft)-1], stackRight[:len(stackRight)-1]
+	for len(stack) > 0 {
+		left, right = stack[0], stack[1]
+		stack = stack[2:]
 
 		if left.Val != right.Val {
 			return false
 		}
 
 		if left.Left != nil && right.Right != nil {
-			stackLeft = append(stackLeft, left.Left)
-			stackRight = append(stackRight, right.Right)
+			stack = append(stack, left.Left, right.Right)
 		} else if left.Left == nil && right.Right == nil {
 
 		} else if left.Left == nil || right.Right == nil {
@@ -98,8 +96,7 @@ func isSymmetric(root *TreeNode) bool {
 		}
 
 		if left.Right != nil && right.Left != nil {
-			stackLeft = append(stackLeft, left.Right)
-			stackRight = append(stackRight, right.Left)
+			stack = append(stack, left.Right, right.Left)
 		} else if left.Right == nil && right.Left == nil {
 
 		} else if left.Right == nil || right.Left == nil {
