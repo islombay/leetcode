@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"container/list"
+	"fmt"
+)
 
 func main() {
 	cases := []struct {
@@ -94,6 +97,8 @@ type ListNode struct {
 
 func reorderList(head *ListNode) {
 	stack := []*ListNode{}
+	var f *list.List
+	f.Remove(f.Back())
 
 	tmpHead := head
 	for tmpHead != nil {
