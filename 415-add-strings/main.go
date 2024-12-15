@@ -1,5 +1,7 @@
 package main
 
+import "strings"
+
 func addStrings(num1 string, num2 string) string {
 	sum := strings.Builder{}
 	carry := '0'
