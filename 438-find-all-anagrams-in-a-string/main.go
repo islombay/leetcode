@@ -60,27 +60,6 @@ func findAnagrams(s string, p string) []int {
 		if newHash == hash {
 			res = append(res, i)
 		}
-		//n := map[rune]int{}
-		//for j := i; j < i+len(p); j++ {
-		//	if val, ok := m[rune(s[j])]; ok {
-		//		n[rune(s[j])]++
-		//		if val < n[rune(s[j])] {
-		//			break
-		//		}
-		//	} else {
-		//		break
-		//	}
-		//}
-		//failed := false
-		//for k, v := range m {
-		//	if n[k] != v {
-		//		failed = true
-		//		break
-		//	}
-		//}
-		//if !failed {
-		//	res = append(res, i)
-		//}
 	}
 	return res
 }
